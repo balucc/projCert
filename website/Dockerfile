@@ -1,3 +1,4 @@
 FROM devopsedu/webapp
-ADD /root/projCert/website* /var/www/html
+RUN rm -rf /var/www/html/*
+ADD . /var/www/html
 CMD ["apachectl", "-D", "FOREGROUND"]

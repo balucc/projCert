@@ -13,5 +13,10 @@ pipeline{
          docker.build ("mywebsite:${env.BUILD_ID}")
 }}
 }
+stage('DockerRun'){
+  steps{
+   sh docker run -itd -p 8081:80 mywebsite
+}}
 }
 }
+

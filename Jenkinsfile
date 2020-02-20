@@ -7,13 +7,13 @@ stages{
 	  }}
  stage('DockerBuild'){
     steps{
-       sh label: '', script: 'docker build . -t mywebsite'
-}
-}
+      script{
+         docker.build . -t mywebsite
+}}
  stage('DockerRun'){
   steps{
    sh label: '', script: 'docker run -itd -p 8081:80 mywebsite'
 }}
-}
+}}
 }
 

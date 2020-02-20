@@ -1,4 +1,9 @@
 pipeline{
+ environment{
+   uname = "balucc/webapp"
+   passwd = "dockerhub"
+   dockerImage = ''
+}
  agent {
   label 'myslave'
 }
@@ -10,13 +15,26 @@ pipeline{
  stage('DockerBuild'){
     steps{
       script{
-         docker.build ("mywebsite:${env.BUILD_ID}")
+        dockerImage = docker.build uname + ":$BUILD_NUMBER"
 }}
 }
+stage('Docker image Push'){
+  steps{
+    script {
+      docker.withRegistry('',passwd) {
+         dockerImage.push()
+    }
+   }
+  }
+ }
+stage('remove images from local') {
+  sh "docker rmi $uname :$BUILD_NUMBER"
+  }  
 stage('DockerRun'){
   steps{
-   sh "docker run -itd -p 8081:80 mywebsite:${env.BUILD_ID}"
+    docker.withRegistry('',passwd){
+      sh "docker run -itd -p 8081:80 $uname :$BUILD_NUMBER"
 }}
 }
 }
-
+}

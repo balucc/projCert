@@ -8,7 +8,7 @@ pipeline{
  stage('DockerBuild'){
     steps{
       script{
-         docker.build -t mywebsite
+         docker.build ("mywebsite:${env.BUILD_ID}")
 }}
 }
 }

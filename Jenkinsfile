@@ -28,8 +28,10 @@ stage('Docker image Push'){
   }
  }
 stage('remove images from local') {
+ steps {
   sh "docker rmi $uname :$BUILD_NUMBER"
   }  
+}
 stage('DockerRun'){
   steps{
    script { 

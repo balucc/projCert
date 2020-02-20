@@ -29,7 +29,7 @@ stage('Docker image Push'){
  }
 stage('remove images from local') {
  steps {
-  sh "docker rmi $dockerImage
+  sh "docker rmi $dockerImage"
   }  
 }
 stage('DockerRun'){

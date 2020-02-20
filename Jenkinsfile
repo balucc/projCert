@@ -32,9 +32,10 @@ stage('remove images from local') {
   }  
 stage('DockerRun'){
   steps{
-    docker.withRegistry('',passwd){
+   script { 
+   docker.withRegistry('',passwd) {
       sh "docker run -itd -p 8081:80 $uname :$BUILD_NUMBER"
-}}
+}}}
 }
 }
 }

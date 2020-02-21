@@ -34,7 +34,7 @@ stage('DockerRun'){
 }
 stage('remove images from local') {
  steps {
-  sh "docker rmi $dockerImage"
+  sh "docker rmi $uname:$BUILD_NUMBER"
  }  
 }
 }

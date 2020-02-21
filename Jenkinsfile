@@ -33,7 +33,9 @@ stage('DockerRun'){
 }
 }
 stage ("wait_for_container_build"){
+ steps {
   sh 'sleep 180'
+}
 }
 stage('remove images from local') {
  steps {

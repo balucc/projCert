@@ -32,6 +32,9 @@ stage('DockerRun'){
       sh "docker run -itd -p 8081:80 $uname:$BUILD_NUMBER"
 }
 }
+stage ("wait_for_container_build"){
+  sh 'sleep 180'
+}
 stage('remove images from local') {
  steps {
   sh "docker rmi $uname:$BUILD_NUMBER"

@@ -27,17 +27,15 @@ stage('Docker image Push'){
    }
   }
  }
+stage('DockerRun'){
+  steps{
+      sh "docker run -itd -p 8081:80 $uname :$BUILD_NUMBER"
+}
+}
 stage('remove images from local') {
  steps {
   sh "docker rmi $dockerImage"
-  }  
-}
-stage('DockerRun'){
-  steps{
-   script { 
-   docker.withRegistry('',passwd) {
-      sh "docker run -itd -p 8081:80 $uname :$BUILD_NUMBER"
-}}}
+ }  
 }
 }
 }
